@@ -25,21 +25,21 @@ The time source can be configured via XML by setting the time element with the
 XML name. The provided time sources don’t include “TimeSource” in their XML
 names.
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```xml
 <nlog>
     <time type="FastLocal" />
     <!-- Rest of Configuration -->
 </nlog>
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 ### Configure Via Runtime Configuration
 
 The time source can be configured by inserting the following before any log
 messages are printed:
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```csharp
 TimeSource.Current = new FastLocalTimeSource();
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 ### Provided Time Sources
 
@@ -83,7 +83,7 @@ property getter `Time` and method `FromSystemTime`.
 -   The method FromSystemTime converts the system time to the same form as if
     the time source provided it.
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```csharp
 [TimeSource("CustomTimeZone")]
 public class CustomTimeZoneTimeSource : TimeSource
 {
@@ -116,7 +116,7 @@ public class CustomTimeZoneTimeSource : TimeSource
         return TimeZoneInfo.ConvertTimeFromUtc(systemTime, ZoneInfo);
     }
 }
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 In addition, add an attribute to the top that provides the name when specifying
 the type via XML.
@@ -127,17 +127,17 @@ renderer](<Extending%20NLog>).
 
 The Runtime Configuration would look like this:
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```csharp
 TimeSource.Current = new CustomTimeZoneTimeSource()
 {
     Zone = "Central Standard Time"
 }
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 The XML Configuration would look like this:
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```xml
 <nlog>
     <time type="CustomTimeZone" zone="Central Standard Time" />
 </nlog>
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
